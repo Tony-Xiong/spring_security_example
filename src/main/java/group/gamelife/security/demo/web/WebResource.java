@@ -1,5 +1,7 @@
 package group.gamelife.security.demo.web;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,7 +30,7 @@ public class WebResource {
     response.sendRedirect("/index");
   }
 
-  @PreAuthorize("")
+  @PreAuthorize("isAuthenticated()")
   @GetMapping("/index")
   public String index(HttpServletResponse response, HttpServletRequest request) throws IOException, ServletException {
 
@@ -58,6 +60,7 @@ public class WebResource {
           + "</html>";
   }
 
+  @PreAuthorize("!isAuthenticated()")
   @GetMapping("/login")
   public String loginPage() {
     return "<!DOCTYPE html>\n"
@@ -80,4 +83,26 @@ public class WebResource {
         + "</body>\n"
         + "</html>";
   }
+
+  @Secured({"ROLE_ADMIN"})
+  @GetMapping("/admin")
+  public ResponseEntity<String> adminPage() {
+
+    return ResponseEntity.ok()
+        .body(
+            "<!DOCTYPE html>\n"
+                + "<html lang=\"en\">\n"
+                + "<head>\n"
+                + "    <meta charset=\"UTF-8\">\n"
+                + "    <title>Login</title>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "\n"
+                + "<h1>admin Page</h1>\n"
+                + "<a href=\"/index\">return</a>"
+                + "\n"
+                + "</body>\n"
+                + "</html>");
+  }
+
 }

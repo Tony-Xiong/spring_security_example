@@ -41,7 +41,7 @@ public class IUserDetailService implements UserDetailsService {
 
            // Collection<GrantedAuthority> authorities = new HashSet<>();
 
-            Collection<GrantedAuthority> authorities = roles.stream().collect(HashSet::new,(temp,role)-> temp.add(new SimpleGrantedAuthority(role.getRoleName())),HashSet::addAll);
+            Collection<GrantedAuthority> authorities = roles.stream().collect(HashSet::new,(temp,role)-> temp.add(new SimpleGrantedAuthority("ROLE_"+role.getRoleName().toUpperCase())),HashSet::addAll);
             log.info("username:"+account.getName());
             log.info("roles:"+authorities);
             return new User(account.getName(),account.getPassword(), authorities);

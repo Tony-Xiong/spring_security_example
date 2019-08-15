@@ -16,7 +16,7 @@ spring:
     hibernate:
       ddl-auto: create-drop
   session:
-    timeout: 10s
+    timeout: 10M
 
 logging:
   level:

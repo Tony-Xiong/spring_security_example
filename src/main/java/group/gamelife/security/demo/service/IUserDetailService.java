@@ -21,7 +21,7 @@ import java.util.Set;
 /**
  * Created by xiongyizhou on 2019/8/15 10:57
  * E-mail: xiongyizhou@powerpms.com
- *
+ * custom UserDetailsService / 自定义的UserDetailsService接口的实现
  * @author xiongyizhou
  */
 @Service("userDetailService")
